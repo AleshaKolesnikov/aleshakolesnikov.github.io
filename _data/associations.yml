@@ -1,11 +1,11 @@
 # Associations
 # comment out the urls if you do not wish to display them
 
-organization: IT-Academy HTP
-role: Student
-year: Oct 2019 &mdash; Feb 2020
-url: https://www.it-academy.by
-summary: Learned C# Basics.
+- organization: IT-Academy HTP
+  role: Student
+  year: Oct 2019 &mdash; Feb 2020
+  url: https://www.it-academy.by
+  summary: Learned C# Basics.
 
 
 #- organization: freeCodeCamp
