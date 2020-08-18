@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8>">
+        <meta name="viewport" content="width=device-width">
+        <title>Messenger UI</title>
+        <link rel="stylesheet" type="text/css" href="styles/styles.css">
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+        <script src="https://kit.fontawesome.com/c85d1ccd52.js" crossorigin="anonymous"></script>
+
+    </head>
+    <body>
+
+<!-- Sprites -->
+<svg style="display: none;">
+    <symbol id="menu" viewBox="0 0 512 512">
+        <g>
+            <g>
+                <path d="M492,236H20c-11.046,0-20,8.954-20,20c0,11.046,8.954,20,20,20h472c11.046,0,20-8.954,20-20S503.046,236,492,236z"/>
+            </g>
+        </g>
+        <g>
+            <g>
+                <path d="M492,76H20C8.954,76,0,84.954,0,96s8.954,20,20,20h472c11.046,0,20-8.954,20-20S503.046,76,492,76z"/>
+            </g>
+        </g>
+        <g>
+            <g>
+                <path d="M492,396H20c-11.046,0-20,8.954-20,20c0,11.046,8.954,20,20,20h472c11.046,0,20-8.954,20-20
+                    C512,404.954,503.046,396,492,396z"/>
+            </g>
+        </g>
+    </symbol>
+    <symbol id="previous" viewBox="0 0 64 64">
+        <path d="m54 30h-39.899l15.278-14.552c.8-.762.831-2.028.069-2.828-.761-.799-2.027-.831-2.828-.069l-17.448 16.62c-.755.756-1.172 1.76-1.172 2.829 0 1.068.417 2.073 1.207 2.862l17.414 16.586c.387.369.883.552 1.379.552.528 0 1.056-.208 1.449-.621.762-.8.731-2.065-.069-2.827l-15.342-14.552h39.962c1.104 0 2-.896 2-2s-.896-2-2-2z"/>
+    </symbol>
+    <symbol id="next"viewBox="0 0 64 64">
+        <path d="m37.379 12.552c-.799-.761-2.066-.731-2.827.069-.762.8-.73 2.066.069 2.828l15.342 14.551h-39.963c-1.104 0-2 .896-2 2s.896 2 2 2h39.899l-15.278 14.552c-.8.762-.831 2.028-.069 2.828.393.412.92.62 1.448.62.496 0 .992-.183 1.379-.552l17.449-16.62c.756-.755 1.172-1.759 1.172-2.828s-.416-2.073-1.207-2.862z"/>
+    </symbol>
+    <symbol id="history" viewBox="0 0 97.16 97.16">
+        <g>
+            <path d="M48.58,0C21.793,0,0,21.793,0,48.58s21.793,48.58,48.58,48.58s48.58-21.793,48.58-48.58S75.367,0,48.58,0z M48.58,86.823
+                c-21.087,0-38.244-17.155-38.244-38.243S27.493,10.337,48.58,10.337S86.824,27.492,86.824,48.58S69.667,86.823,48.58,86.823z"/>
+            <path d="M73.898,47.08H52.066V20.83c0-2.209-1.791-4-4-4c-2.209,0-4,1.791-4,4v30.25c0,2.209,1.791,4,4,4h25.832
+                c2.209,0,4-1.791,4-4S76.107,47.08,73.898,47.08z"/>
+        </g>
+    </symbol>
+    <symbol id="help" viewBox="0 0 512 512">
+        <g><path d="m256 512c-68.38 0-132.667-26.628-181.02-74.98s-74.98-112.64-74.98-181.02 26.628-132.667 74.98-181.02 112.64-74.98 181.02-74.98 132.667 26.628 181.02 74.98 74.98 112.64 74.98 181.02-26.628 132.667-74.98 181.02-112.64 74.98-181.02 74.98zm0-480c-123.514 0-224 100.486-224 224s100.486 224 224 224 224-100.486 224-224-100.486-224-224-224z"/><path d="m256 368c-8.836 0-16-7.164-16-16 0-40.386 15.727-78.354 44.285-106.912 17.872-17.873 27.715-41.635 27.715-66.911 0-27.668-22.509-50.177-50.177-50.177h-3.646c-27.668 0-50.177 22.509-50.177 50.177v5.823c0 8.836-7.164 16-16 16s-16-7.164-16-16v-5.823c0-45.313 36.864-82.177 82.177-82.177h3.646c45.313 0 82.177 36.864 82.177 82.177 0 33.823-13.171 65.622-37.088 89.539-22.514 22.513-34.912 52.446-34.912 84.284 0 8.836-7.164 16-16 16z"/><path d="m256.02 432c-8.836 0-16.005-7.164-16.005-16s7.158-16 15.995-16h.01c8.836 0 16 7.164 16 16s-7.164 16-16 16z"/></g>
+    </symbol>
+    <symbol id="minimize" viewBox="0 0 512 512">
+            <g>
+                <path d="M400.601,241H111.399c-8.284,0-15,6.716-15,15s6.716,15,15,15H400.6c8.284,0,15-6.716,15-15
+                    C415.601,247.716,408.885,241,400.601,241z"/>
+            </g>
+    </symbol>
+    <symbol id="maximize"viewBox="0 0 469.333 469.333">
+        <g>
+            <polygon points="360.533,192 360.533,234.667 426.667,234.667 426.667,384 213.333,384 213.333,320 170.667,320 170.667,426.667 
+                469.333,426.667 469.333,192 		"/>
+        </g>
+        <g>
+            <path d="M0,42.667v298.667h384V42.667H0z M341.333,298.667H42.667V85.333h298.667V298.667z"/>
+        </g>
+    </symbol>
+    <symbol id="exit" viewBox="0 0 47.971 47.971">
+        <path d="M28.228,23.986L47.092,5.122c1.172-1.171,1.172-3.071,0-4.242c-1.172-1.172-3.07-1.172-4.242,0L23.986,19.744L5.121,0.88
+		c-1.172-1.172-3.07-1.172-4.242,0c-1.172,1.171-1.172,3.071,0,4.242l18.865,18.864L0.879,42.85c-1.172,1.171-1.172,3.071,0,4.242
+		C1.465,47.677,2.233,47.97,3,47.97s1.535-0.293,2.121-0.879l18.865-18.864L42.85,47.091c0.586,0.586,1.354,0.879,2.121,0.879
+		s1.535-0.293,2.121-0.879c1.172-1.171,1.172-3.071,0-4.242L28.228,23.986z"/>
+    </symbol>
+    <symbol id="plus" viewBox="0 0 512 512">
+        <g>
+            <path d="M492,236H276V20c0-11.046-8.954-20-20-20c-11.046,0-20,8.954-20,20v216H20c-11.046,0-20,8.954-20,20s8.954,20,20,20h216
+                v216c0,11.046,8.954,20,20,20s20-8.954,20-20V276h216c11.046,0,20-8.954,20-20C512,244.954,503.046,236,492,236z"/>
+        </g>
+    </symbol>
+    <symbol id="expand" viewBox="0 0 306 306">
+        <polygon points="270.3,58.65 153,175.95 35.7,58.65 0,94.35 153,247.35 306,94.35 		"/>
+    </symbol>
+</svg>
+<!-- Header -->
+<header class="header">
+        <div class="header__inner">
+            <div class="left__icons">
+                <a title="Menu" class="btn standart">
+                    <svg class="icon">
+                        <use xlink:href="#menu"></use>
+                    </svg>
+                </a>
+            </div><!--/.left__icons-->
+            <div class="center__icons">
+                    <a title="Previous" class="btn" href="#">
+                        <svg class="icon">
+                            <use xlink:href="#previous"></use>
+                        </svg>
+                    </a>
+                    <a title="Next" class="btn" href="#">
+                        <svg class="icon">
+                            <use xlink:href="#next"></use>
+                        </svg>
+                    </a>
+                    <a title="History" class="btn" href="#">
+                        <svg class="icon">
+                            <use xlink:href="#history"></use>
+                        </svg>
+                    </a>
+                    <!-- TODO -->
+                    <input type="search" name="search" placeholder="Search Ais">
+                    <!-- TODO -->
+            </div><!--/.center__icons-->
+            <div class="right__icons">
+                <a title="Help" class="btn" href="#">
+                    <svg class="icon">
+                        <use xlink:href="#help"></use>
+                    </svg>
+                </a>
+                <a title="Minimize" class="btn standart" href="#">
+                    <svg class="icon">
+                        <use xlink:href="#minimize"></use>
+                    </svg>
+                </a>
+                <a title="Maximize" class="btn standart" href="#">
+                    <svg class="icon">
+                        <use xlink:href="#maximize"></use>
+                    </svg>
+                </a>
+                <a title="Exit" class="btn standart close" href="#">
+                    <svg class="icon">
+                        <use xlink:href="#exit"></use>
+                    </svg>
+                </a>
+            </div><!--/.right__icons-->
+        </div><!--./header__innerr-->
+</header>
+<!-- Main -->
+<div class="container">
+    <div class="chat__choiser">
+        <div class="chat__picture__container">
+            <a class="chat__picture" href="#">
+                <img contenteditable src="assets/img/itacadem.jpg" alt="">
+            </a>
+        </div>
+        <div class="chat__picture__container">
+            <a class="chat__picture" href="#">
+                <img contenteditable src="assets/img/ais.jpg" alt="">
+            </a>
+        </div>
+        <div class="chat__picture__container">
+            <a title="Add workspace" class="btn">
+            <svg class="icon">
+                <use xlink:href="#plus"></use>
+            </svg>
+        </a>
+        </div>
+    </div><!-- /.chat__choiser -->
+    <div class="main">
+        <div class="main__header">
+            <div class="user__info">
+                <h5 style="font-size: 1.2em; color: #d1d2d3;">Ais 
+                    <span>
+                        <svg class="mini__icon">
+                            <use xlink:href="#expand"></use>
+                        </svg>
+                    </span>
+                </h5>
+                <p class="font__mini"><i style="color:#2bac76; font-size: 75%;" class="fas fa-circle"></i>Alexei Kolesnikov</p>
+                <!-- new message icon -->
+                <a onfocus="this.blur()" class="btn position_right" href="#">
+                    <i style="color: #d1d2d3; font-size: 3em;" class="fas fa-circle fa-stack-2x"></i>
+                    <i style="color: #252328; font-size: 1.5em;" class="far fa-edit fa-stack-1x"></i>
+                </a>
+            </div><!-- /.user__info-->
+            <div class="channel__info">
+                <div class="channel__info__header">
+                    <a href="#">
+                        <span class="icon lock_i">task2</span>
+                    </a>
+                    <a style="padding-top: 0.2em;" href="#"><i class="far fa-star"></i></a>  
+                </div>
+                <!-- info-button -->
+                <a class="btn position_right" href="#">
+                    <i class="far fa-circle fa-stack-2x"></i>
+                    <i class="fas fa-info fa-stack-1x"></i>
+                </a><!-- /.info-button -->
+                <div class="channel__info__footer">
+                    <a class="icon user_i" href="#">200</a>
+                    <a class="icon pinned_i" href="#">2</a>
+                    <a href="#">Add a topic</a>
+                </div>
+            </div><!--/.channel_info-->
+            <div class="details__info">
+                <div class="details__info__header">Thread</div>
+                <a class="btn position_right" href="#">
+                    <i class="fas fa-times"></i>
+                </a>
+                <div class="details__info__footer">
+                    <a href="#">
+                        <span class="icon lock_i">task2</span>
+                    </a>
+                </div>
+            </div> <!--/.details__info-->
+        </div><!--./main__header-->
+        <div class="main__workspace">
+            <div class="nav__menu">
+                <div class="frequently__search">
+                    <a href="#">
+                        <i class="far fa-comment-dots fa-flip-horizontal"></i>Theads
+                    </a>
+                    <a href="#">
+                        <i class="fas fa-at"></i>Mentions & reactions
+                    </a>
+                    <a onfocus="this.blur()" class="expand" href="#">
+                        <i class="fas fa-arrow-down"></i>Show more
+                    </a>
+                </div><!-- /.frequently__search -->
+                <div class="nav__channels">
+                    <a onfocus="this.blur()" class="expand" href="#">
+                        <i class="fas fa-caret-down"></i>Channels
+                    </a>
+                    <a href="#">
+                        <i class="fas fa-hashtag"></i>general
+                    </a>
+                    <a href="#">
+                        <i class="fas fa-hashtag"></i>questions
+                    </a>
+                    <a href="#">
+                        <i class="fas fa-hashtag"></i>random
+                    </a>
+                    <a href="#">
+                        <i class="fas fa-hashtag"></i>task1
+                    </a>
+                </div> <!--/.nav__channels-->
+                <div class="nav__direct">
+                    <a onfocus="this.blur()" class="expand" href="#">
+                        <i class="fas fa-caret-down"></i>Direct messages
+                    </a>
+                    <a href="#">
+                        <i style="color:#2bac76; font-size: 75%;" class="fas fa-heart"></i>SlackBot
+                    </a>
+                    <a href="#">
+                        <i style="color:#2bac76; font-size: 75%;" class="fas fa-circle"></i>Alexei Kolesnikov
+                    </a>
+                </div> <!--/.nav__direct-->
+            </div><!-- /.nav__menu -->
+            <div class="main__chat">
+                <div class="chat__messages">
+                    <div class="message__container">
+                        <div class="avatar__container">
+                            <a href="#"><img class="avatar__photo" src="assets/img/avatar-1.jpg" alt=""></a>
+                        </div>
+                        <div class="content__contaner">
+                            <div class="name">Ivanov Ivan</div>
+                            <div class="time">10:06 AM</div>
+                            <p class="message">
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam elementum orci id odio maximus posuere. Nulla eget risus euismod purus ornare dignissim. Ut interdum ligula id ultrices facilisis
+                            </p>
+                            <div class="message__option">
+                                <a class="option" href="#"><img class="avatar__photo avatar__photo--opt" src="assets/img/avatar-2.jpg" alt=""></a>
+                                <a class="option" href="#"><img class="avatar__photo avatar__photo--opt" src="assets/img/avatar-3.jpg" alt=""></a>
+                                <a class="option" href="#"><img class="avatar__photo avatar__photo--opt" src="assets/img/avatar-4.jpg" alt=""></a>
+                                <a class="replies" href="#">3 replies</a>
+                                <div class="reply__info">
+                                    <div class="visible__last__reply">
+                                        Last reply 3 days ago
+                                    </div>
+                                    <div class="hidden__view__reply">
+                                        View thread
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="hidden__reactions">
+                                <a class="btn" href="#"><i class="far fa-grin fa-lg"></i></a>
+                                <a class="btn" href="#"><i class="far fa-comment-dots fa-flip-horizontal fa-lg"></i></a>
+                                <a class="btn" href="#"><i class="fas fa-share fa-lg"></i></a>
+                                <a class="btn" href="#"><i class="fas fa-bookmark fa-lg"></i></a>
+                                <a class="btn" href="#"><i class="fas fa-ellipsis-v fa-lg"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="message__container">
+                        <div class="avatar__container">
+                            <a href="#"><img class="avatar__photo" src="assets/img/avatar-3.jpg" alt=""></a>
+                        </div>
+                        <div class="content__contaner">
+                            <div class="name">Vasiliev Vasya</div>
+                            <div class="time">7:07 PM</div>
+                            <p class="message">
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam elementum orci id odio maximus posuere.
+                                <div class="message__img">
+                                    <a href="#"><img src="assets/img/example.jpg" alt=""></a>
+                                    <a href="#"><img src="assets/img/example.jpg" alt=""></a>
+                                    <a href="#"><img src="assets/img/example.jpg" alt=""></a>
+                                </div>
+                            </p>
+                            <div class="message__option">
+                                <a class="option" href="#"><img class="avatar__photo avatar__photo--opt" src="assets/img/avatar-3.jpg" alt=""></a>
+                                <a class="replies" href="#">1 repliy</a>
+                                <div class="reply__info">
+                                    <div class="visible__last__reply">
+                                        Last reply 1 days ago
+                                    </div>
+                                    <div class="hidden__view__reply">
+                                        View thread
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="hidden__reactions">
+                                <a class="btn" href="#"><i class="far fa-grin fa-lg"></i></a>
+                                <a class="btn" href="#"><i class="far fa-comment-dots fa-flip-horizontal fa-lg"></i></a>
+                                <a class="btn" href="#"><i class="fas fa-share fa-lg"></i></a>
+                                <a class="btn" href="#"><i class="fas fa-bookmark fa-lg"></i></a>
+                                <a class="btn" href="#"><i class="fas fa-ellipsis-v fa-lg"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="message__container">
+                        <div class="avatar__container">
+                            <a href="#"><img class="avatar__photo" src="assets/img/avatar-4.jpg" alt=""></a>
+                        </div>
+                        <div class="content__contaner">
+                            <div class="name">Malinovskaya Maria</div>
+                            <div class="time">8:16 PM</div>
+                            <p class="message">
+                                :)
+                                <div class="message__img">
+                                    <a href="#"><img src="assets/img/example-2.jpg" alt=""></a>
+                                </div>
+                            </p>
+                            <div class="message__option">
+                                <a class="option" href="#"><img class="avatar__photo avatar__photo--opt" src="assets/img/avatar-3.jpg" alt=""></a>
+                                <a class="replies" href="#">1 repliy</a>
+                                <div class="reply__info">
+                                    <div class="visible__last__reply">
+                                        Last reply 1 days ago
+                                    </div>
+                                    <div class="hidden__view__reply">
+                                        View thread
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="hidden__reactions">
+                                <a class="btn" href="#"><i class="far fa-grin fa-lg"></i></a>
+                                <a class="btn" href="#"><i class="far fa-comment-dots fa-flip-horizontal fa-lg"></i></a>
+                                <a class="btn" href="#"><i class="fas fa-share fa-lg"></i></a>
+                                <a class="btn" href="#"><i class="fas fa-bookmark fa-lg"></i></a>
+                                <a class="btn" href="#"><i class="fas fa-ellipsis-v fa-lg"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div><!--/.chat__messages-->
+                <div class="text__input__container">
+                    <textarea class="text__input" placeholder="Message task2"></textarea>
+                    <div class="input__options">
+                        <div class="left__options">
+                            <a class="btn" href="#">
+                                <i class="fas fa-bolt"></i>
+                            </a>
+                            <a class="btn holding_third_btn" href="#">
+                                <i class="fas fa-bold"></i>
+                            </a>
+                            <a class="btn holding_third_btn" href="#">
+                                <i class="fas fa-italic"></i>
+                            </a>
+                            <a class="btn holding_second_btn" href="#">
+                                <i class="fas fa-strikethrough"></i>
+                            </a>
+                            <a class="btn holding_second_btn" href="#">
+                                <i class="fas fa-code"></i>
+                            </a>
+                            <a class="btn holding_second_btn" href="#">
+                                <i class="fas fa-link"></i>
+                            </a>
+                            <a class="btn holding_first_btn" href="#">
+                                <i class="fas fa-list-ol"></i>
+                            </a>
+                            <a class="btn holding_first_btn" href="#">
+                                <i class="fas fa-list-ul"></i>
+                            </a>
+                            <a class="btn holding_first_btn" href="#">
+                                <i class="far fa-file-code"></i>
+                            </a>
+                            <a class="btn hidden_btn" href="#">
+                                <i class="fas fa-ellipsis-h"></i>
+                            </a>
+                        </div>
+                        <div class="right__options">
+                            <a href="#" class="btn">
+                                <i class="fas fa-at"></i>
+                            </a>
+                            <a href="#" class="btn">
+                                <i class="far fa-smile"></i>
+                            </a>
+                            <a href="#" class="btn">
+                                <i class="fas fa-paperclip"></i>
+                            </a>
+                            <a href="#" class="btn">
+                                <i class="fab fa-google-play"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div><!--text__input-->
+            </div><!--/.main__Chat-->
+            <div class="details">
+                <div class="threads__main__message">
+                    <div class="message__container">
+                        <div class="avatar__container">
+                            <a href="#"><img class="avatar__photo" src="assets/img/avatar-1.jpg" alt=""></a>
+                        </div>
+                        <div class="content__contaner">
+                            <div class="name">Ivanov Ivan</div>
+                            <div class="time">10:06 AM</div>
+                            <p class="message">
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam elementum orci id odio maximus posuere. Nulla eget risus euismod purus ornare dignissim. Ut interdum ligula id ultrices facilisis
+                            </p>
+                            <div class="message__option">
+                                <a class="option" href="#"><img class="avatar__photo avatar__photo--opt" src="assets/img/avatar-2.jpg" alt=""></a>
+                                <a class="option" href="#"><img class="avatar__photo avatar__photo--opt" src="assets/img/avatar-3.jpg" alt=""></a>
+                                <a class="option" href="#"><img class="avatar__photo avatar__photo--opt" src="assets/img/avatar-4.jpg" alt=""></a>
+                                <a class="replies" href="#">3 replies</a>
+                                <div class="reply__info">
+                                    <div class="visible__last__reply">
+                                        Last reply 3 days ago
+                                    </div>
+                                    <div class="hidden__view__reply">
+                                        View thread
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="hidden__reactions">
+                                <a class="btn" href="#"><i class="far fa-grin fa-lg"></i></a>
+                                <a class="btn" href="#">
+                                    <i class="fas fa-hashtag fa-lg"></i>
+                                    <i class="fas fa-long-arrow-alt-left"></i>
+                                </a>
+                                <a class="btn" href="#"><i class="fas fa-bookmark fa-lg"></i></a>
+                                <a class="btn" href="#"><i class="fas fa-ellipsis-v fa-lg"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="reply__quantity">
+                        <span>3 replies</span>
+                    </div>
+                </div> <!--/.threads__main__message-->
+                <div class="threads__replies">
+                    <div class="message__container">
+                        <div class="avatar__container">
+                            <a href="#"><img class="avatar__photo" src="assets/img/avatar-2.jpg" alt=""></a>
+                        </div>
+                        <div class="content__contaner">
+                            <div class="name">Danilov Danil</div>
+                            <div class="time">12:06 AM</div>
+                            <p class="message">Nulla eget risus euismod purus ornare dignissim. Ut interdum ligula id ultrices facilisis
+                            </p>
+                            <div class="message__option">
+                                <a class="option" href="#"><img class="avatar__photo avatar__photo--opt" src="assets/img/avatar-2.jpg" alt=""></a>
+                                <a class="option" href="#"><img class="avatar__photo avatar__photo--opt" src="assets/img/avatar-3.jpg" alt=""></a>
+                                <a class="option" href="#"><img class="avatar__photo avatar__photo--opt" src="assets/img/avatar-4.jpg" alt=""></a>
+                                <a class="replies" href="#">3 replies</a>
+                                <div class="reply__info">
+                                    <div class="visible__last__reply">
+                                        Last reply 3 days ago
+                                    </div>
+                                    <div class="hidden__view__reply">
+                                        View thread
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="hidden__reactions">
+                                <a class="btn" href="#"><i class="far fa-grin fa-lg"></i></a>
+                                <a class="btn" href="#"><i class="fas fa-bookmark fa-lg"></i></a>
+                                <a class="btn" href="#"><i class="fas fa-ellipsis-v fa-lg"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="message__container">
+                        <div class="avatar__container">
+                            <a href="#"><img class="avatar__photo" src="assets/img/avatar-3.jpg" alt=""></a>
+                        </div>
+                        <div class="content__contaner">
+                            <div class="name">Vasiliev Vasya</div>
+                            <div class="time">1:21 PM</div>
+                            <p class="message">Ut interdum ligula id ultrices facilisis
+                            </p>
+                            <div class="message__option">
+                                <a class="option" href="#"><img class="avatar__photo avatar__photo--opt" src="assets/img/avatar-2.jpg" alt=""></a>
+                                <a class="option" href="#"><img class="avatar__photo avatar__photo--opt" src="assets/img/avatar-3.jpg" alt=""></a>
+                                <a class="option" href="#"><img class="avatar__photo avatar__photo--opt" src="assets/img/avatar-4.jpg" alt=""></a>
+                                <a class="replies" href="#">3 replies</a>
+                                <div class="reply__info">
+                                    <div class="visible__last__reply">
+                                        Last reply 3 days ago
+                                    </div>
+                                    <div class="hidden__view__reply">
+                                        View thread
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="hidden__reactions">
+                                <a class="btn" href="#"><i class="far fa-grin fa-lg"></i></a>
+                                <a class="btn" href="#"><i class="fas fa-bookmark fa-lg"></i></a>
+                                <a class="btn" href="#"><i class="fas fa-ellipsis-v fa-lg"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="message__container">
+                        <div class="avatar__container">
+                            <a href="#"><img class="avatar__photo" src="assets/img/avatar-4.jpg" alt=""></a>
+                        </div>
+                        <div class="content__contaner">
+                            <div class="name">Malinovskaya Maria</div>
+                            <div class="time">5:02 PM</div>
+                            <p class="message">:)
+                            </p>
+                            <div class="message__option">
+                                <a class="option" href="#"><img class="avatar__photo avatar__photo--opt" src="assets/img/avatar-2.jpg" alt=""></a>
+                                <a class="option" href="#"><img class="avatar__photo avatar__photo--opt" src="assets/img/avatar-3.jpg" alt=""></a>
+                                <a class="option" href="#"><img class="avatar__photo avatar__photo--opt" src="assets/img/avatar-4.jpg" alt=""></a>
+                                <a class="replies" href="#">3 replies</a>
+                                <div class="reply__info">
+                                    <div class="visible__last__reply">
+                                        Last reply 3 days ago
+                                    </div>
+                                    <div class="hidden__view__reply">
+                                        View thread
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="hidden__reactions">
+                                <a class="btn" href="#"><i class="far fa-grin fa-lg"></i></a>
+                                <a class="btn" href="#"><i class="fas fa-bookmark fa-lg"></i></a>
+                                <a class="btn" href="#"><i class="fas fa-ellipsis-v fa-lg"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="text__input__container">
+                    <textarea class="text__input" placeholder="Message task2"></textarea>
+                    <div class="input__options">
+                        <div class="left__options">
+                            <a class="btn" href="#">
+                                <i class="fas fa-bolt"></i>
+                            </a>
+                            <a class="btn holding_third_btn" href="#">
+                                <i class="fas fa-bold"></i>
+                            </a>
+                            <a class="btn holding_third_btn" href="#">
+                                <i class="fas fa-italic"></i>
+                            </a>
+                            <a class="btn holding_second_btn" href="#">
+                                <i class="fas fa-strikethrough"></i>
+                            </a>
+                            <a class="btn holding_second_btn" href="#">
+                                <i class="fas fa-code"></i>
+                            </a>
+                            <a class="btn holding_second_btn" href="#">
+                                <i class="fas fa-link"></i>
+                            </a>
+                            <a class="btn" href="#">
+                                <i class="fas fa-ellipsis-h"></i>
+                            </a>
+                        </div>
+                        <div class="right__options">
+                            <a href="#" class="btn">
+                                <i class="fas fa-at"></i>
+                            </a>
+                            <a href="#" class="btn">
+                                <i class="far fa-smile"></i>
+                            </a>
+                            <a href="#" class="btn">
+                                <i class="fas fa-paperclip"></i>
+                            </a>
+                            <a href="#" class="btn">
+                                <i class="fab fa-google-play"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div><!--text__input-->
+            </div><!--/.details-->
+        </div> <!--/.main__workspace-->
+    </div><!-- /.main -->
+</div>
+    </body>
+</html>
